@@ -1,5 +1,5 @@
 // app/page.tsx
-import FlashcardNavigation from '../components/FlashcardNavigation';
+import FlashCard from '@/components/Flashcard';
 
 interface FlashcardData {
   id: number;
@@ -14,7 +14,8 @@ const HomePage: React.FC = async () => {
   return (
     <div className="container mx-auto mt-10">
       <h1 className="text-4xl text-center mb-8">Flashcard Learning Tool</h1>
-      <FlashcardNavigation flashcards={flashcards} />
+      {/* <FlashcardNavigation flashcards={flashcards} /> */}
+      <FlashCard flashcards={flashcards} />
     </div>
   );
 };

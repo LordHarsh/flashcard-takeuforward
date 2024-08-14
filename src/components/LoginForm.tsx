@@ -20,7 +20,7 @@ import { Input } from "@/components/ui/input";
 import { toast } from "@/components/ui/use-toast";
 
 const FormSchema = z.object({
-  email: z.string({
+  user: z.string({
     message: "Invalid username.",
   }),
   password: z.string().min(6, {
@@ -44,11 +44,11 @@ export default function LoginForm() {
   const onSubmit = async (data: FormData) => {
     console.log("Submitting form", data);
 
-    const { email, password } = data;
+    const { user, password } = data;
 
     try {
       const response: any = await signIn("credentials", {
-        email,
+        email: user,
         password,
         redirect: false,
       });
@@ -71,17 +71,17 @@ export default function LoginForm() {
   };
 
   return (
-    <Form {...form} className="w-2/3 space-y-6">
+    <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
         className="text-white p-4 md:p-16 border-[1.5px] rounded-lg border-gray-300 flex flex-col items-center justify-center gap-y-6"
       >
         <FormField
           control={form.control}
-          name="email"
+          name="user"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Provide Email</FormLabel>
+              <FormLabel>Email</FormLabel>
               <FormControl>
                 <Input
                   className="text-black"
@@ -98,11 +98,11 @@ export default function LoginForm() {
           name="password"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Provide Password</FormLabel>
+              <FormLabel>Password</FormLabel>
               <FormControl>
                 <Input
                   className="text-black"
-                  placeholder="Hasło"
+                  placeholder="********"
                   {...field}
                   type="password"
                 />
@@ -115,7 +115,7 @@ export default function LoginForm() {
           className="hover:scale-110 hover:bg-cyan-700"
           disabled={form.formState.isSubmitting}
         >
-          {form.formState.isSubmitting ? "Opening...." : "Open Sesame!"}
+          {form.formState.isSubmitting ? "Opening...." : "Login!"}
         </Button>
       </form>
     </Form>

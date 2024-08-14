@@ -1,55 +1,29 @@
-"use client";
-// app/admin/page.tsx
-import { useSession, signIn } from 'next-auth/react';
-import { useRouter } from 'next/navigation';
-import { useEffect } from 'react';
-import Link from 'next/link';
+import Link from "next/link";
 
-const AdminDashboard: React.FC = () => {
+const AdminPage: React.FC = () => {
   return (
     <div className="container mx-auto mt-10">
       <h1 className="text-4xl text-center mb-8">Admin Dashboard</h1>
       <div className="flex justify-center space-x-4">
-        <Link className="p-2 bg-green-500 text-white rounded" href="/admin/add">
-          Add Flashcard
+        <Link className="p-[3px] relative" href="/admin/add">
+          <div className="absolute inset-0 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-lg" />
+          <div className="px-8 py-2  bg-black rounded-[6px]  relative group transition duration-200 text-white hover:bg-transparent">
+            Add Flashcards
+          </div>
         </Link>
-        <Link className="p-2 bg-yellow-500 text-white rounded" href="/admin/edit">
-          Edit Flashcards
+        <Link className="p-[3px] relative" href="/admin/edit">
+          <div className="absolute inset-0 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-lg" />
+          <div className="px-8 py-2  bg-black rounded-[6px]  relative group transition duration-200 text-white hover:bg-transparent">
+            Edit Flashcards
+          </div>
         </Link>
-        <Link className="p-2 bg-red-500 text-white rounded" href="/admin/delete">
-          Delete Flashcards
+        <Link className="p-[3px] relative" href="/admin/add">
+          <div className="absolute inset-0 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-lg" />
+          <div className="px-8 py-2  bg-black rounded-[6px]  relative group transition duration-200 text-white hover:bg-transparent">
+            Delete Flashcard
+          </div>
         </Link>
       </div>
-    </div>
-  );
-};
-
-const AdminPage: React.FC = () => {
-  const { data: session, status } = useSession();
-  const router = useRouter();
-
-  useEffect(() => {
-    if (status === 'loading') return; // Do nothing while loading
-
-    if (!session) {
-      router.push('/auth/signin');
-    } else if (session.user.role !== 'admin') {
-      router.push('/');
-    }
-  }, [session, status, router]);
-
-  if (status === 'loading') {
-    return <p>Loading...</p>;
-  }
-
-  if (!session || session.user.role !== 'admin') {
-    return <p>Redirecting...</p>;
-  }
-
-  return (
-    <div>
-      <h1>Admin Dashboard</h1>
-      {/* Admin features go here */}
     </div>
   );
 };
